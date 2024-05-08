@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Calculator</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #333;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  #calculator {
+    background-color: #1c1c1c;
+    padding: 20px;
+    border-radius: 10px;
+    width:300px;
+  }
+  #display {
+
+    width: 90%;
+    background-color: #1c1c1c;
+    color: #f3e7e7;
+    padding: 10px;
+    font-size: 2rem;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor:text;
+
+  }
+  .button {
+    background-color: #4e4e4e;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    margin: 5px;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width:60px;
+    height:60px;
+  }
+  .button.operator {
+    background-color: #fe9505;
+  }
+  .button.double {
+    grid-column: span 2;
+    width:135px;
+  }
+</style>
+</head>
+<body>
+<div id="calculator">
+  <input type="text" id="display">
+  <div class="button-row">
+    <button class="button operator">AC</button>
+    <button class="button operator">DE</button>
+    <button class="button operator">.</button>
+    <button class="button operator">/</button>
+  </div>
+  <!-- Add more rows and buttons for numbers and operators -->
+  <div class="button-row">
+    <button class="button">7</button>
+    <button class="button">8</button>
+    <button class="button">9</button>
+    <button class="button operator">*</button>
+  </div>
+  <!-- ... -->
+  <div class="button-row">
+    <button class="button">4</button>
+    <button class="button">5</button>
+    <button class="button">6</button>
+    <button class="button operator">-</button>
+  </div>
+
+  <div class="button-row">
+    <button class="button">1</button>
+    <button class="button">2</button>
+    <button class="button">3</button>
+    <button class="button operator">+</button>
+  </div>
+
+  <div class="button-row">
+    <button class="button">0</button>
+    <button class="button">00</button>
+    <button class="button double">=</button>
+  </div>
+  
+</div>
+
+<script>
+  const display = document.getElementById('display');
+  const buttons = document.querySelectorAll('.button');
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const value = button.textContent;
+      if (value === 'AC') {
+        display.value = '';
+      } else if (value === 'DE') {
+        display.value = display.value.slice(0, -1);
+      } else if (value === '=') {
+        try {
+          display.value = eval(display.value);
+        } catch (e) {
+          display.value = 'Error';
+        }
+      } else {
+        display.value += value;
+      }
+    });
+  });
+</script>
+</body>
+</html>
